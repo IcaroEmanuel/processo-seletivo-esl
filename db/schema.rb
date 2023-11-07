@@ -10,7 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_03_233312) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_07_023324) do
+  create_table "reservations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "room_id", null: false
+    t.bigint "weekday_id", null: false
+    t.bigint "timeslot_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_reservations_on_room_id"
+    t.index ["timeslot_id"], name: "index_reservations_on_timeslot_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
+    t.index ["weekday_id"], name: "index_reservations_on_weekday_id"
+  end
+
+  create_table "rooms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "timeslots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.time "start_time", null: false
+    t.time "end_time", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -19,4 +45,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_233312) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "weekdays", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "reservations", "rooms"
+  add_foreign_key "reservations", "timeslots"
+  add_foreign_key "reservations", "users"
+  add_foreign_key "reservations", "weekdays"
 end
