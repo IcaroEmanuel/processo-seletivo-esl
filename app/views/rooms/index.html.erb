@@ -22,11 +22,37 @@
                 Reservado para <%= find_user_by_reservation(timeslot.id, weekday.id) %>
               </td>
             <% else %>
-              <td>Disponível</td>
+              <td>
+                <button type="button" class="btn btn-link disponivel" data-bs-toggle="modal" data-bs-target="#reservationModal" data-timeslot-id="<%= timeslot.id %>" data-weekday-id="<%= weekday.id %>">
+                  Disponível
+                </button>
+              </td>
             <% end %>
           <% end %>
         </tr>
       <% end %>
     </tbody>
   </table>
+
+  <!-- Modal -->
+  <div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="reservationModalLabel">Confirme sua reserva</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Confirmar reserva para: <span class="user"></span></p>
+          <p>Dia da reserva: <span class="weekday"></span></p>
+          <p>Horário da reserva: <span class="start_time"></span></p>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
