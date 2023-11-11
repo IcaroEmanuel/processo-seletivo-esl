@@ -23,7 +23,7 @@
               </td>
             <% else %>
               <td>
-                <button type="button" class="btn btn-link available" data-bs-toggle="modal" data-bs-target="#reservationModal" data-user-id="<%= current_user.id %>" data-timeslot-id="<%= timeslot.id %>" data-weekday-id="<%= weekday.id %>">
+                <button type="button" class="btn btn-link available" data-bs-toggle="modal" data-bs-target="#reservationModal" data-timeslot-id="<%= timeslot.id %>" data-weekday-id="<%= weekday.id %>">
                   Disponível
                 </button>
               </td>
@@ -52,7 +52,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" id="confirm-reservation" class="btn btn-primary">Confirmar</button>
+          <button type="button" class="btn btn-primary confirm" id="confirm">Confirmar</button>
         </div>
       </div>
     </div>
@@ -64,6 +64,9 @@
   $('.available').on('click', function() {
     const timeslotId = $(this).data('timeslot-id');
     const weekdayId = $(this).data('weekday-id');
+
+    $('.confirm').data('timeslot-id', timeslotId)
+    $('.confirm').data('weekday-id', weekdayId)
 
     $.ajax({
       url: '/rooms/details',
@@ -82,4 +85,26 @@
     });
 });
 
+$('.confirm').on('click', function() {
+  const csrfToken = $('meta[name="csrf-token"]').attr('content');
+  const timeslotId = $(this).data('timeslot-id');
+  const weekdayId = $(this).data('weekday-id');
+
+  $.ajax({
+    headers: {
+      'X-CSRF-Token': csrfToken
+    },
+    url: '/rooms/create',
+    method: 'POST',
+    data: { weekday_id: weekdayId, timeslot_id: timeslotId },
+    success: function(response) {
+      $('.modalSuccess').text(response.success || response.error);
+      $('#reservationModal').modal('hide');
+      location.reload();
+    },
+    error: function(error) {
+      console.log('error', error.responseText);
+    }
+  });
+});
 </script>
