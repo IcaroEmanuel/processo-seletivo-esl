@@ -23,7 +23,7 @@
               </td>
             <% else %>
               <td>
-                <button type="button" class="btn btn-link disponivel" data-bs-toggle="modal" data-bs-target="#reservationModal" data-timeslot-id="<%= timeslot.id %>" data-weekday-id="<%= weekday.id %>">
+                <button type="button" class="btn btn-link available" data-bs-toggle="modal" data-bs-target="#reservationModal" data-user-id="<%= current_user.id %>" data-timeslot-id="<%= timeslot.id %>" data-weekday-id="<%= weekday.id %>">
                   Disponível
                 </button>
               </td>
@@ -42,17 +42,44 @@
           <h1 class="modal-title fs-5" id="reservationModalLabel">Confirme sua reserva</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <p>Confirmar reserva para: <span class="user"></span></p>
+        <div class="modal-body text-center">
+          <h2>Detalhes da reserva</h2>
+          <p>Usuário: <span class="user"></span></p>
           <p>Dia da reserva: <span class="weekday"></span></p>
           <p>Horário da reserva: <span class="start_time"></span></p>
+          <p class="modalSuccess"></p>
 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Confirmar</button>
+          <button type="button" id="confirm-reservation" class="btn btn-primary">Confirmar</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+<script>
+  $('.available').on('click', function() {
+    const timeslotId = $(this).data('timeslot-id');
+    const weekdayId = $(this).data('weekday-id');
+
+    $.ajax({
+      url: '/rooms/details',
+      method: 'GET',
+      data: { timeslot_id: timeslotId, weekday_id: weekdayId },
+      success: function(response) {
+        $('.user').text(response.user);
+        $('.weekday').text(response.weekday);
+        $('.start_time').text(response.start_time);
+        $('.room').text(response.room)
+        $('#reservationModal').modal('show');
+      },
+      error: function(error) {
+        console.log('error', error)
+      }
+    });
+});
+
+</script>
