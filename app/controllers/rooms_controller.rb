@@ -40,11 +40,21 @@ class RoomsController < ApplicationController
 
       if reservation.save
         render json: { success: 'Reserva criada com sucesso!' }
-        # redirect_to rooms_path
       else
         render json: { error: reservation.errors.full_messages }, status: :unprocessable_entity
       end
 
     end
   end
+
+  def destroy
+    reservation = Reservation.find(params[:id])
+    
+    if reservation.delete
+      render json: { success: 'Reserva excluída com sucesso!' }
+    else
+      render json: { error: 'Falha ao excluir a reserva.' }, status: :unprocessable_entity
+    end
+  end
+  
 end

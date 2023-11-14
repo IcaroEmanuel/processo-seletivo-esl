@@ -13,4 +13,9 @@ module RoomsHelper
       "Nenhum usuário"
     end
   end
+
+  def find_reservation(timeslot_id, weekday_id)
+    reservation = Reservation.find_by(timeslot_id: timeslot_id, weekday_id: weekday_id)
+    reservation.id
+  end
 end

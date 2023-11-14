@@ -20,6 +20,11 @@
             <% if reservation_exists?(weekday.id, timeslot.id) %>
               <td>
                 Reservado para <%= find_user_by_reservation(timeslot.id, weekday.id) %>
+                <% if current_user.name == find_user_by_reservation(timeslot.id, weekday.id) %>
+                  <button class="material-symbols-outlined delete-reservation" data-reservation-id="<%= find_reservation(timeslot.id, weekday.id) %>">
+                    delete
+                  </button>
+                <% end %>
               </td>
             <% else %>
               <td>
@@ -69,7 +74,7 @@
     $('.confirm').data('weekday-id', weekdayId)
 
     $.ajax({
-      url: '/rooms/details',
+      url: '/rooms/1/details',
       method: 'GET',
       data: { timeslot_id: timeslotId, weekday_id: weekdayId },
       success: function(response) {
@@ -94,7 +99,7 @@ $('.confirm').on('click', function() {
     headers: {
       'X-CSRF-Token': csrfToken
     },
-    url: '/rooms/create',
+    url: '/rooms/1/create',
     method: 'POST',
     data: { weekday_id: weekdayId, timeslot_id: timeslotId },
     success: function(response) {
@@ -107,4 +112,24 @@ $('.confirm').on('click', function() {
     }
   });
 });
+
+$('.delete-reservation').on('click', function(){
+  const csrfToken = $('meta[name="csrf-token"]').attr('content');
+  const reservationId = $(this).data('reservation-id');
+
+  $.ajax({
+    headers: {
+      'X-CSRF-Token': csrfToken
+    },
+    url: `/rooms/${reservationId}`,
+    method: 'DELETE',
+    success: function(response) {
+      location.reload();
+    },
+    error: function(error) {
+      console.log('error', error);
+    }
+  })
+})
+
 </script>
