@@ -1,9 +1,34 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Salas de reunião
+rooms = [
+  { name: 'Sala 1' },
+]
+
+# Dias da semana
+weekdays = [
+  { name: 'Segunda-feira' },
+  { name: 'Terça-feira' },
+  { name: 'Quarta-feira' },
+  { name: 'Quinta-feira' },
+  { name: 'Sexta-feira' }
+]
+
+# Horários disponíveis
+timeslots = [
+  { start_time: '08:00', end_time: '08:59' },
+  { start_time: '09:00', end_time: '09:59' },
+  { start_time: '10:00', end_time: '10:59' },
+  { start_time: '11:00', end_time: '11:59' },
+  { start_time: '12:00', end_time: '12:59' },
+  { start_time: '13:00', end_time: '13:59' },
+  { start_time: '14:00', end_time: '14:59' },
+  { start_time: '15:00', end_time: '15:59' },
+  { start_time: '16:00', end_time: '16:59' },
+  { start_time: '17:00', end_time: '17:59' },
+]
+
+Room.create(rooms)
+
+Weekday.create(weekdays)
+
+Timeslot.create(timeslots)
+
