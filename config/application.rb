@@ -9,6 +9,7 @@ Bundler.require(*Rails.groups)
 module ProcessoSeletivoEsl
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    require 'dotenv/load' if Rails.env.development? || Rails.env.test?
     config.load_defaults 7.1
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
