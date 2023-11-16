@@ -54,4 +54,4 @@ production:
   database: ddj6jvom45kpba
   username: hjuoqswxllzmie
   password: <% ENV["DATABASE_PASSWORD_PROD"] %>
-  url: <% ENV["ATABASE_URL"] %>
+  url: <% ENV["DATABASE_URL"] %>
