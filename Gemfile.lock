@@ -284,7 +284,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   mysql2 (~> 0.5)
-  pg
+  pg (~> 1.5.4)
   puma (>= 5.0)
   rails (~> 7.1.1)
   selenium-webdriver
