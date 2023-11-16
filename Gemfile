@@ -47,11 +47,12 @@ gem 'dartsass-sprockets'
 
 gem 'jquery-rails'
 
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+  gem "mysql2", "~> 0.5"
 end
 
 group :development do
@@ -65,8 +66,6 @@ group :development do
   # gem "spring"
 
   # Use mysql as the database for Active Record
-  gem "mysql2", "~> 0.5"
-
 end
 
 group :test do
@@ -76,5 +75,5 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '~> 1.1'
+  gem 'pg'
 end
