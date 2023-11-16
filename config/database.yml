@@ -53,5 +53,5 @@ production:
   adapter: postgresql
   database: ddj6jvom45kpba
   username: hjuoqswxllzmie
-  password: 34582f1190c40da8726a1abb97133870cfd234e28a4afbb801967013f8920775
-  port: 5432
+  password: <% ENV["DATABASE_PASSWORD_PROD"] %>
+  url: <% ENV["ATABASE_URL"] %>
