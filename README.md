@@ -1,24 +1,46 @@
-# README
+# Projeto Sala de Reuniões
+## Projeto desenvolvido durante o processo seletivo para a vaga de Desenvolvedor Web na ESl
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Tecnologias utilizadas
+- Ruby na versão 3.2.2
+- Ruby on rails versão 7.1.1
+- Bootstrasp
+- Javascript(Ajax/Jquery)
+- Banco de dados Postgres
 
-Things you may want to cover:
+### Para rodar o projeto localmente
+````
+Faça o clone: 
+git clone https://github.com/IcaroEmanuel/processo-seletivo-esl.git
 
-* Ruby version
+No terminal, navegue até a pasta do projeto e digite o comando bundle install
 
-* System dependencies
+Criei uma arquivo dotenv para salvar as variáveis de ambiente de acesso ao seu banco de dados
 
-* Configuration
+Criei o banco de dados com o comando rails db:create
 
-* Database creation
+Execute as migrações: rails db:migrate
 
-* Database initialization
+Execute as seeds iniciais: rails db:seed
 
-* How to run the test suite
+Inicie o projeto com o comando rails server
+````
+## Features
+- Cadastro de usário
+- Login
+- Tela para reservas de salas. A tela de reservas só pode ser acessada por quem estiver logado
+- É possivel gerenciar suas reservas estando logado
+- Somente é possível excluir suas reservas estando logado, não é possível excluir reservas de outra pessoa
 
-* Services (job queues, cache servers, search engines, etc.)
+## Para fazer
+- Testes da aplicação
+- Melhorias no template
+- Calendário baseado em dias reais
+- Acesso a reservas antigas em modo leitura
 
-* Deployment instructions
-
-* ...
+## Informaçõs para contato
+```
+email: icaro.emanuel@outlook.com
+LinkedIn: https://www.linkedin.com/in/icaroemanuel/
+Whatsapp: (77)9 9143-1059
+```
