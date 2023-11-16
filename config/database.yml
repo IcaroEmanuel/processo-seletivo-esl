@@ -51,7 +51,6 @@ test:
 production:
   <<: *default
   adapter: postgresql
-  database: ddj6jvom45kpba
-  username: hjuoqswxllzmie
-  password: <% ENV["DATABASE_PASSWORD_PROD"] %>
-  url: <% ENV["DATABASE_URL"] %>
+  database: processo_seletivo_esl_production
+  username: processo_seletivo_esl
+  password: <%= ENV["PROCESSO_SELETIVO_ESL_DATABASE_PASSWORD"] %>
